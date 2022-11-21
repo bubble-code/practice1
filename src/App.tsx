@@ -1,11 +1,14 @@
 import { useAppDispatch, useAppStore } from './app/hook'
 import { increment, amountAdd } from './feacture/counter/counter-slice'
+import { useFetchIssusQuery } from './feacture/gitHub/gitHup-api-slice'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
   const count = useAppStore(state => state.counter.value);
   const dispatch = useAppDispatch()
+
+  const { data = [], isFetching } = useFetchIssusQuery(10);
 
   function changeCounter() {
     // dispatch(increment())
@@ -32,7 +35,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        {data.length}
       </p>
     </div>
   )
